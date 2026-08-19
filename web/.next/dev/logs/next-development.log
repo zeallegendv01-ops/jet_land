@@ -9,3 +9,6 @@
 {"timestamp":"00:00:04.125","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
 {"timestamp":"00:00:04.130","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
 {"timestamp":"00:00:09.020","source":"Server","level":"LOG","message":"✓ Compiled in 103ms"}
+{"timestamp":"00:04:25.494","source":"Server","level":"LOG","message":"✓ Compiled in 104ms"}
+{"timestamp":"00:04:33.457","source":"Server","level":"LOG","message":"✓ Compiled in 87ms"}
+{"timestamp":"00:04:37.639","source":"Server","level":"LOG","message":"✓ Compiled in 50ms"}

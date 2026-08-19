@@ -52,6 +52,11 @@ button {
   cursor: pointer;
 }
 
+button svg, a svg, .scroll-note svg, .service-stack svg, .featured-badge svg {
+  flex: none;
+  display: block;
+}
+
 a {
   color: inherit;
   text-decoration: none;
