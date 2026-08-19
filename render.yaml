@@ -12,6 +12,10 @@ services:
     buildCommand: npm --prefix web ci && npm --prefix web run build
     startCommand: npm --prefix web start
     envVars:
+      - key: JETLAND_API_URL
+        value: https://jet-land-2.onrender.com
+      - key: NEXT_PUBLIC_JETLAND_API_URL
+        value: https://jet-land-2.onrender.com
       - key: JETLAND_API_HOSTPORT
         fromService:
           type: web
