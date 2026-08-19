@@ -19,7 +19,8 @@ function createTelegramWebhookBot({ token, route, app }) {
     return null;
   }
 
-  // Allow opting into polling for local development: set TELEGRAM_POLLING=true
+  // Allow opting into polling for local development: set TELEGRAM_POLLING=true.
+  // In production, keep it false so the bot registers a public webhook endpoint.
   const usePolling = String(process.env.TELEGRAM_POLLING).toLowerCase() === 'true';
   const bot = new TelegramBot(token, { polling: usePolling });
 
@@ -35,7 +36,8 @@ function createTelegramWebhookBot({ token, route, app }) {
       }
     });
 
-    const webhookUrl = process.env.SERVER_URL ? `${process.env.SERVER_URL}${route}` : null;
+    const baseUrl = (process.env.SERVER_URL || '').replace(/\/+$/, '');
+    const webhookUrl = baseUrl ? `${baseUrl}${route}` : null;
     if (webhookUrl) {
       bot.setWebHook(webhookUrl).catch((err) => {
         console.warn(`Failed to set webhook for ${route}:`, err.message || err);
