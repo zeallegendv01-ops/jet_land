@@ -82,9 +82,9 @@ function createTelegramWebhookBot({ token, route, app }) {
     },
     sendMessage: async (chatId, text, options = {}) => {
       const payload = Object.assign({ chat_id: chatId, text }, options);
-      return bot.sendMessage(chatId, text, options);
+      return bot.api.sendMessage(payload);
     },
-    getFile: async (fileId) => bot.getFile(fileId),
+    getFile: async (fileId) => bot.api.getFile({ file_id: fileId }),
     api: bot.api,
     startPolling: async () => { if (typeof bot.startPolling === 'function') return bot.startPolling(); },
     stopPolling: async () => {
