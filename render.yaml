@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: jetland-api
+    runtime: node
+    buildCommand: npm --prefix server ci
+    startCommand: npm --prefix server start
+    healthCheckPath: /health
+
+  - type: web
+    name: jetland-web
+    runtime: node
+    buildCommand: npm --prefix web ci && npm --prefix web run build
+    startCommand: npm --prefix web start
+    envVars:
+      - key: JETLAND_API_HOSTPORT
+        fromService:
+          type: web
+          name: jetland-api
+          property: hostport

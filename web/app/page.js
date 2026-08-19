@@ -13,7 +13,11 @@ const fallbackProperties = [
 
 const categories = ['All', 'Residential', 'Luxury', 'Investment'];
 
-function Arrow() { return <span aria-hidden="true">↗</span>; }
+function Arrow() {
+  return <svg aria-hidden="true" viewBox="0 0 20 20" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M4 16 16 4M7 4h9v9" />
+  </svg>;
+}
 function formatFileSize(bytes) {
   if (!bytes) return 'Campaign material';
   return `${(bytes / 1024 / 1024).toFixed(bytes > 1024 * 1024 ? 1 : 0)} MB`;
