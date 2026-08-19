@@ -42,6 +42,14 @@ export default function JetlandHomeClient() {
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [flyers, setFlyers] = useState([]);
   const [flyersLoaded, setFlyersLoaded] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  const memberName = useMemo(() => {
+    if (!currentUser?.name) return 'Dashboard';
+    const parts = currentUser.name.trim().split(/\s+/);
+    if (parts.length === 1) return parts[0];
+    return `${parts[0]} ${parts[1][0]}.`;
+  }, [currentUser]);
 
   useEffect(() => {
     fetch('/api/properties').then(response => response.ok ? response.json() : Promise.reject()).then(data => {
@@ -50,8 +58,52 @@ export default function JetlandHomeClient() {
     fetch('/api/flyers').then(response => response.ok ? response.json() : Promise.reject()).then(data => {
       setFlyers(data.flyers || []);
     }).catch(() => undefined).finally(() => setFlyersLoaded(true));
-    setSaved(JSON.parse(localStorage.getItem('jetland-saved') || '[]'));
+
+    const storedUser = localStorage.getItem('jetland-user');
+    if (storedUser) {
+      try {
+        const parsedUser = JSON.parse(storedUser);
+        setCurrentUser(parsedUser);
+      } catch (error) {
+        localStorage.removeItem('jetland-user');
+      }
+    }
+
+    const token = localStorage.getItem('jetland-token');
+    if (token) {
+      fetch('/api/auth/me', { headers: { Authorization: `Bearer ${token}` } })
+        .then(response => response.ok ? response.json() : Promise.reject())
+        .then(data => {
+          if (data.user) {
+            localStorage.setItem('jetland-user', JSON.stringify(data.user));
+            setCurrentUser(data.user);
+          } else {
+            localStorage.removeItem('jetland-token');
+            localStorage.removeItem('jetland-user');
+          }
+        })
+        .catch(() => {
+          localStorage.removeItem('jetland-token');
+          localStorage.removeItem('jetland-user');
+          setCurrentUser(null);
+        });
+    }
   }, []);
+
+  useEffect(() => {
+    const guestKey = 'jetland-saved-guest';
+    const userKey = currentUser ? `jetland-saved-${currentUser.id}` : guestKey;
+    const guestSaved = JSON.parse(localStorage.getItem(guestKey) || '[]');
+    if (currentUser) {
+      const userSaved = JSON.parse(localStorage.getItem(userKey) || '[]');
+      const merged = [...new Set([...(userSaved.length ? userSaved : guestSaved), ...userSaved])];
+      setSaved(merged);
+      localStorage.setItem(userKey, JSON.stringify(merged));
+      if (!userSaved.length && guestSaved.length) localStorage.setItem(guestKey, JSON.stringify([]));
+      return;
+    }
+    setSaved(JSON.parse(localStorage.getItem(guestKey) || '[]'));
+  }, [currentUser]);
 
   const visibleProperties = useMemo(() => properties.filter(property => {
     const matchesCategory = filter === 'All' || property.category === filter;
@@ -62,7 +114,8 @@ export default function JetlandHomeClient() {
   function toggleSaved(id) {
     const next = saved.includes(id) ? saved.filter(item => item !== id) : [...saved, id];
     setSaved(next);
-    localStorage.setItem('jetland-saved', JSON.stringify(next));
+    const storageKey = currentUser ? `jetland-saved-${currentUser.id}` : 'jetland-saved-guest';
+    localStorage.setItem(storageKey, JSON.stringify(next));
   }
 
   function openProperty(property) {
@@ -80,8 +133,20 @@ export default function JetlandHomeClient() {
       });
       const payload = await response.json();
       if (!response.ok) throw new Error(payload.message);
+
+      if (authMode === 'register') {
+        setAuthMode('login');
+        setAuthMessage('Account created. Please sign in now.');
+        event.currentTarget.reset();
+        return;
+      }
+
       localStorage.setItem('jetland-token', payload.token);
+      localStorage.setItem('jetland-user', JSON.stringify(payload.user));
+      setCurrentUser(payload.user);
       setAuthMessage(payload.message);
+      setModal(null);
+      event.currentTarget.reset();
     } catch (error) {
       setAuthMessage(error.message || 'Unable to reach the account service.');
     }
@@ -110,7 +175,7 @@ export default function JetlandHomeClient() {
       <div className={`nav-links ${menuOpen ? 'is-open' : ''}`}>
         <a href="#collection" onClick={() => setMenuOpen(false)}>Collection</a><a href="#services" onClick={() => setMenuOpen(false)}>Services</a><button className="text-button" onClick={() => { setMenuOpen(false); setModal('flyers'); }}>Campaigns</button><a href="#contact" onClick={() => setMenuOpen(false)}>Contact</a>
         <button className="text-button" onClick={() => { setAuthMode('login'); setModal('auth'); }}>Sign in</button>
-        <button className="nav-cta" onClick={() => { setAuthMode('register'); setModal('auth'); }}>Become a member <Arrow /></button>
+        <button className="nav-cta" onClick={() => { if (currentUser) { setModal('explore'); return; } setAuthMode('register'); setModal('auth'); }}>{currentUser ? memberName : 'Become a member'} <Arrow /></button>
       </div>
     </nav>
 
@@ -134,7 +199,7 @@ export default function JetlandHomeClient() {
 
     <section className="journal --effects" id="journal"><p className="eyebrow">The field notes</p><h2>Perspective for the<br/><em>future you&apos;re building.</em></h2><div className="journal-cards"><article><span>OWNERSHIP</span><h3>How to recognise a land opportunity with real staying power.</h3><a href="#collection">Read field note <Arrow /></a></article><article><span>INSIGHT</span><h3>Three signals shaping Nigeria&apos;s most thoughtful new neighbourhoods.</h3><a href="#collection">Read field note <Arrow /></a></article></div></section>
 
-    <footer><a className="brand" href="#top">JETLAND<span>•</span></a><p>Land, beautifully considered.</p><button className="footer-flyers" onClick={() => setModal('flyers')}>Campaign flyers <DownIcon /></button><button className="button button-gold" onClick={() => { setAuthMode('register'); setModal('auth'); }}>Start your journey <Arrow /></button><small>© {new Date().getFullYear()} Jetland. Built for what&apos;s next.</small></footer>
+    <footer><a className="brand" href="#top">JETLAND<span>•</span></a><p>Land, beautifully considered.</p><button className="footer-flyers" onClick={() => setModal('flyers')}>Campaign flyers <DownIcon /></button><button className="button button-gold" onClick={() => { if (currentUser) { setModal('explore'); return; } setAuthMode('register'); setModal('auth'); }}>{currentUser ? 'Dashboard' : 'Start your journey'} <Arrow /></button><small>© {new Date().getFullYear()} Jetland. Built for what&apos;s next.</small></footer>
 
     {modal === 'explore' && <div className="overlay" role="dialog" aria-modal="true" aria-label="Explore properties"><div className="explorer"><button className="close" onClick={() => setModal(null)}><CloseIcon /></button><p className="eyebrow">A place for every future</p><h2>Explore the collection.</h2><div className="explore-tools"><label><span><SearchIcon /></span><input value={query} onChange={event => setQuery(event.target.value)} autoFocus placeholder="Search location or estate"/></label><div className="filters">{categories.map(category => <button className={filter === category ? 'active' : ''} onClick={() => setFilter(category)} key={category}>{category}</button>)}</div></div><p className="result-count">{visibleProperties.length} properties selected for you</p><div className="explore-grid">{visibleProperties.map(property => <article key={property.id} onClick={() => openProperty(property)}><img src={`/assets/img/${property.image}`} alt=""/><div><span>{property.featured ? 'Featured listing' : property.category}</span><h3>{property.name}</h3><p>{property.location || 'Nigeria'} · {property.price}</p></div><button aria-label={`Save ${property.name}`} className={saved.includes(property.id) ? 'saved' : ''} onClick={event => { event.stopPropagation(); toggleSaved(property.id); }}><HeartIcon /></button></article>)}{!visibleProperties.length && <p className="no-results">No estates match that search yet.</p>}</div></div></div>}
 

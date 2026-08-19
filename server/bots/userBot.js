@@ -9,11 +9,21 @@ function formatUser(user) {
 }
 
 function registerUserBot(bot) {
-  bot.onText(/\/adduser(?:\s+(.+))?/i, async (msg, match) => {
-    const [name, email, phone] = parseArgs(match[1]);
-    if (!name) return bot.sendMessage(msg.chat.id, 'Usage: /adduser name | email | phone');
-    const user = saveRecord('users', { name, email: email || '', phone: phone || '' });
-    bot.sendMessage(msg.chat.id, `User created:\n${formatUser(user)}`);
+  const pendingUserCreation = new Map();
+
+  function startUserWizard(chatId) {
+    pendingUserCreation.set(chatId, { step: 'name', data: {} });
+    bot.sendMessage(chatId, 'Let’s add a user. Reply with the full name. Type cancel anytime to stop.');
+  }
+
+  bot.onText(/\/(newuser|adduser)(?:\s+(.+))?/i, async (msg, match) => {
+    const input = (match && match[2]) || '';
+    const [name, email, phone] = parseArgs(input);
+    if (name) {
+      const user = saveRecord('users', { name, email: email || '', phone: phone || '' });
+      return bot.sendMessage(msg.chat.id, `User created:\n${formatUser(user)}`);
+    }
+    startUserWizard(msg.chat.id);
   });
 
   bot.onText(/\/edituser(?:\s+(.+))?/i, async (msg, match) => {
@@ -50,9 +60,52 @@ function registerUserBot(bot) {
     bot.sendMessage(msg.chat.id, user ? formatUser(user) : `User ${id} not found.`);
   });
 
+  bot.on('message', async (msg) => {
+    if (!msg.text || msg.text.startsWith('/')) return;
+    const flow = pendingUserCreation.get(msg.chat.id);
+    if (!flow) return;
+
+    const reply = String(msg.text).trim();
+    if (!reply) return;
+
+    if (/^cancel$/i.test(reply)) {
+      pendingUserCreation.delete(msg.chat.id);
+      return bot.sendMessage(msg.chat.id, 'User flow cancelled. Send /newuser anytime to start again.');
+    }
+
+    if (flow.step === 'name') {
+      flow.data.name = reply;
+      flow.step = 'email';
+      return bot.sendMessage(msg.chat.id, 'Good. Reply with the email address.');
+    }
+
+    if (flow.step === 'email') {
+      flow.data.email = reply;
+      flow.step = 'phone';
+      return bot.sendMessage(msg.chat.id, 'Last step: reply with the phone number.');
+    }
+
+    if (flow.step === 'phone') {
+      flow.data.phone = reply;
+      const user = saveRecord('users', {
+        name: flow.data.name,
+        email: flow.data.email || '',
+        phone: flow.data.phone || '',
+      });
+      pendingUserCreation.delete(msg.chat.id);
+      return bot.sendMessage(msg.chat.id, `User created:\n${formatUser(user)}`);
+    }
+  });
+
   bot.onText(/\/(userhelp|help)/i, async (msg) => {
     const helpText = [
-      '/adduser name | email | phone',
+      'Simple flow:',
+      '/newuser',
+      '1) reply with full name',
+      '2) reply with email',
+      '3) reply with phone',
+      '',
+      'Quick commands:',
       '/edituser id | field | value',
       '/deleteuser id',
       '/listusers',

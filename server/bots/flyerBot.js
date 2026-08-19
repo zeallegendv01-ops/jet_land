@@ -14,26 +14,22 @@ function ensureUploadsDir() {
 }
 
 function registerFlyerBot(bot) {
-  // Alias command: /flyer
-  bot.onText(/\/flyer(?:\s+(.+))?/i, async (msg, match) => {
-    if (!match || !match[1]) {
-      return bot.sendMessage(msg.chat.id, 'Use /flyer title | https://download-url | description, or send a document with caption "title | optional description" to upload a flyer.');
-    }
-    const [title, url, description = ''] = parseArgs(match[1]);
-    if (!title || !/^https?:\/\//i.test(url || '')) {
-      return bot.sendMessage(msg.chat.id, 'Usage: /flyer title | https://download-url | optional description');
-    }
-    const flyer = saveRecord('flyers', { title, url, description, source: 'link' });
-    return bot.sendMessage(msg.chat.id, `Campaign flyer saved: ${flyer.title} (${flyer.id})`);
-  });
+  const pendingFlyerCreation = new Map();
 
-  bot.onText(/\/addflyer(?:\s+(.+))?/i, async (msg, match) => {
-    const [title, url, description = ''] = parseArgs(match[1]);
-    if (!title || !/^https?:\/\//i.test(url || '')) {
-      return bot.sendMessage(msg.chat.id, 'Usage: /addflyer title | https://download-url | optional description');
+  function startFlyerWizard(chatId) {
+    pendingFlyerCreation.set(chatId, { step: 'title', data: {} });
+    bot.sendMessage(chatId, 'Let’s add a campaign flyer. Reply with the flyer title. Type cancel anytime to stop.');
+  }
+
+  // Legacy commands still work, but the guided flow is now preferred.
+  bot.onText(/\/(newflyer|addflyer|flyer)(?:\s+(.+))?/i, async (msg, match) => {
+    const input = (match && match[2]) || '';
+    const [title, url, description = ''] = parseArgs(input);
+    if (title && url && /^https?:\/\//i.test(url)) {
+      const flyer = saveRecord('flyers', { title, url, description, source: 'link' });
+      return bot.sendMessage(msg.chat.id, `Campaign flyer saved: ${flyer.title}\nID: ${flyer.id}`);
     }
-    const flyer = saveRecord('flyers', { title, url, description, source: 'link' });
-    return bot.sendMessage(msg.chat.id, `Campaign flyer saved: ${flyer.title} (${flyer.id})`);
+    startFlyerWizard(msg.chat.id);
   });
 
   bot.onText(/\/deleteflyer(?:\s+(.+))?/i, async (msg, match) => {
@@ -49,10 +45,89 @@ function registerFlyerBot(bot) {
   });
 
   bot.on('message', async msg => {
+    if (msg.text && !msg.text.startsWith('/')) {
+      const flow = pendingFlyerCreation.get(msg.chat.id);
+      if (!flow) return;
+
+      const reply = String(msg.text).trim();
+      if (!reply) return;
+
+      if (/^cancel$/i.test(reply)) {
+        pendingFlyerCreation.delete(msg.chat.id);
+        return bot.sendMessage(msg.chat.id, 'Flyer flow cancelled. Send /newflyer anytime to start again.');
+      }
+
+      if (flow.step === 'title') {
+        flow.data.title = reply;
+        flow.step = 'description';
+        return bot.sendMessage(msg.chat.id, 'Good. Now reply with a short description for the flyer.');
+      }
+
+      if (flow.step === 'description') {
+        flow.data.description = reply;
+        flow.step = 'source';
+        return bot.sendMessage(msg.chat.id, 'Perfect. Now send the flyer file, or reply with a public download URL.');
+      }
+
+      if (flow.step === 'source') {
+        const value = reply.trim();
+        if (/^https?:\/\//i.test(value)) {
+          const flyer = saveRecord('flyers', {
+            title: flow.data.title,
+            description: flow.data.description || '',
+            url: value,
+            source: 'link'
+          });
+          pendingFlyerCreation.delete(msg.chat.id);
+          return bot.sendMessage(msg.chat.id, `Campaign flyer saved: ${flyer.title}\nID: ${flyer.id}`);
+        }
+        return bot.sendMessage(msg.chat.id, 'Please send the flyer file or reply with a valid URL. Type cancel if you want to stop.');
+      }
+    }
+
     if (!msg.document) return;
+    const flow = pendingFlyerCreation.get(msg.chat.id);
+    if (!flow) {
+      try {
+        const [title, description = ''] = parseArgs(msg.caption);
+        const document = msg.document;
+        const info = await bot.getFile(document.file_id);
+        const filePath = info && (info.file_path || info.filePath);
+        if (!filePath) throw new Error('Telegram did not return a downloadable file path.');
+        const token = process.env.TELEGRAM_TOKEN;
+        if (!token) throw new Error('TELEGRAM_TOKEN is required to download uploaded flyers.');
+
+        ensureUploadsDir();
+        const originalName = path.basename(document.file_name || filePath || 'campaign-flyer');
+        const filename = `${Date.now()}-${document.file_id}-${originalName}`.replace(/[^a-zA-Z0-9._-]/g, '_');
+        const destination = path.join(uploadsDir, filename);
+        const url = `https://api.telegram.org/file/bot${token}/${filePath}`;
+        const response = await axios.get(url, { responseType: 'stream' });
+        await new Promise((resolve, reject) => {
+          const stream = response.data.pipe(fs.createWriteStream(destination));
+          stream.on('finish', resolve);
+          stream.on('error', reject);
+        });
+
+        const flyer = saveRecord('flyers', {
+          title: title || path.parse(originalName).name,
+          description,
+          filename,
+          originalName,
+          mimeType: document.mime_type || 'application/octet-stream',
+          size: document.file_size || 0,
+          source: 'telegram'
+        });
+        return bot.sendMessage(msg.chat.id, `Campaign flyer uploaded: ${flyer.title}\nID: ${flyer.id}`);
+      } catch (error) {
+        console.error('Flyer upload error:', error);
+        return bot.sendMessage(msg.chat.id, `Could not upload flyer: ${error.message || error}`);
+      }
+    }
+
     try {
-      const [title, description = ''] = parseArgs(msg.caption);
       const document = msg.document;
+      const title = flow.data.title || path.parse(document.file_name || 'campaign-flyer').name;
       const info = await bot.getFile(document.file_id);
       const filePath = info && (info.file_path || info.filePath);
       if (!filePath) throw new Error('Telegram did not return a downloadable file path.');
@@ -72,14 +147,15 @@ function registerFlyerBot(bot) {
       });
 
       const flyer = saveRecord('flyers', {
-        title: title || path.parse(originalName).name,
-        description,
+        title,
+        description: flow.data.description || (msg.caption || ''),
         filename,
         originalName,
         mimeType: document.mime_type || 'application/octet-stream',
         size: document.file_size || 0,
         source: 'telegram'
       });
+      pendingFlyerCreation.delete(msg.chat.id);
       return bot.sendMessage(msg.chat.id, `Campaign flyer uploaded: ${flyer.title}\nID: ${flyer.id}`);
     } catch (error) {
       console.error('Flyer upload error:', error);

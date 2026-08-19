@@ -1,4 +1,5 @@
 const { createTelegramWebhookBot } = require('../lib/telegramFactory');
+const { readData } = require('../lib/storage');
 
 // Telegram only displays commands that have been explicitly registered through
 // the Bot API. Keep this list in one place so the menu and /help stay aligned
@@ -8,6 +9,7 @@ const BOT_COMMANDS = [
   { command: 'help', description: 'Show all available commands' },
   { command: 'commands', description: 'Show all available commands' },
   { command: 'botstatus', description: 'Show loaded bot modules' },
+  { command: 'manage', description: 'Open the guided admin menu' },
   { command: 'newproperty', description: 'Create a property' },
   { command: 'editproperty', description: 'Edit a property' },
   { command: 'deleteproperty', description: 'Delete a property' },
@@ -16,16 +18,20 @@ const BOT_COMMANDS = [
   { command: 'propertyfeatures', description: 'Update property features' },
   { command: 'listproperties', description: 'List properties' },
   { command: 'propertyhelp', description: 'Show property command help' },
+  { command: 'newuser', description: 'Create a user in guided flow' },
   { command: 'adduser', description: 'Create a user record' },
   { command: 'edituser', description: 'Edit a user record' },
   { command: 'deleteuser', description: 'Delete a user record' },
   { command: 'listusers', description: 'List user records' },
   { command: 'getuser', description: 'Get a user record by ID' },
   { command: 'userhelp', description: 'Show user command help' },
+  { command: 'newflyer', description: 'Create a flyer in guided flow' },
   { command: 'addflyer', description: 'Add a campaign flyer link' },
   { command: 'flyer', description: 'Add a campaign flyer link' },
   { command: 'listflyers', description: 'List campaign flyers' },
   { command: 'deleteflyer', description: 'Delete a campaign flyer' },
+  { command: 'newhero', description: 'Set the homepage hero image' },
+  { command: 'heroimage', description: 'Set the homepage hero image' },
   { command: 'addvideo', description: 'Add a video link' },
   { command: 'editvideo', description: 'Edit a video' },
   { command: 'deletevideo', description: 'Delete a video' },
@@ -33,7 +39,7 @@ const BOT_COMMANDS = [
   { command: 'addsection', description: 'Add a content section' },
   { command: 'editsection', description: 'Edit a content section' },
   { command: 'listsections', description: 'List content sections' },
-  { command: 'videohelp', description: 'Show video command help' },
+  { command: 'videohelp', description: 'Show media command help' },
   { command: 'addsubscriber', description: 'Add a newsletter subscriber' },
   { command: 'removesubscriber', description: 'Remove a newsletter subscriber' },
   { command: 'listsubscribers', description: 'List newsletter subscribers' },
@@ -93,6 +99,62 @@ function initBots(app) {
     // explicit /commands alias to ensure visibility in chats
     bot.onText(/\/commands/i, (msg) => {
       bot.sendMessage(msg.chat.id, `Available commands:\n${commandHelpText}`);
+    });
+    bot.onText(/\/(manage|helpall|admin)/i, (msg) => {
+      const text = [
+        'Jetland admin guide:',
+        '/newproperty - create a property step by step',
+        '/newflyer - create a flyer step by step',
+        '/newuser - create a user step by step',
+        '/newhero - set the homepage hero image',
+        '',
+        'Quick actions:',
+        '/listproperties',
+        '/listflyers',
+        '/listusers',
+        '/listvideos',
+        '/latest - see the newest saved item',
+        '/help',
+      ].join('\n');
+      bot.sendMessage(msg.chat.id, text);
+    });
+
+    bot.onText(/\/latest(?:\s+(.+))?/i, (msg, match) => {
+      const type = (match && match[1] && match[1].toLowerCase().trim()) || 'all';
+      const collections = {
+        all: ['properties', 'flyers', 'users', 'videos', 'contentSections'],
+        property: ['properties'],
+        properties: ['properties'],
+        flyer: ['flyers'],
+        flyers: ['flyers'],
+        user: ['users'],
+        users: ['users'],
+        video: ['videos'],
+        videos: ['videos'],
+        hero: ['contentSections'],
+        section: ['contentSections'],
+        sections: ['contentSections'],
+      };
+      const targets = collections[type] || collections.all;
+      const latest = [];
+
+      for (const collectionName of targets) {
+        const items = readData(collectionName)
+          .filter((item) => item && (item.id || item.title || item.email || item.filename || item.content));
+        if (items.length) {
+          const last = items[items.length - 1];
+          let summary = `Type: ${collectionName}`;
+          if (collectionName === 'properties') summary += `\nTitle: ${last.title || 'Untitled'}\nID: ${last.id}\nLocation: ${last.location || 'N/A'}`;
+          if (collectionName === 'flyers') summary += `\nTitle: ${last.title || 'Untitled'}\nID: ${last.id}\nURL: ${last.url || last.filename || 'N/A'}`;
+          if (collectionName === 'users') summary += `\nName: ${last.name || 'Untitled'}\nID: ${last.id}\nEmail: ${last.email || 'N/A'}`;
+          if (collectionName === 'videos') summary += `\nTitle: ${last.title || 'Untitled'}\nID: ${last.id}\nURL/File: ${last.url || last.fileId || 'N/A'}`;
+          if (collectionName === 'contentSections') summary += `\nTitle: ${last.title || 'Untitled'}\nID: ${last.id}\nContent: ${last.content || last.imagePath || 'N/A'}`;
+          latest.push(summary);
+        }
+      }
+
+      if (!latest.length) return bot.sendMessage(msg.chat.id, 'No saved records found yet.');
+      return bot.sendMessage(msg.chat.id, latest.join('\n\n'));
     });
     // runtime modules list for diagnostics
     bot.onText(/\/modules|\/botstatus/i, (msg) => {

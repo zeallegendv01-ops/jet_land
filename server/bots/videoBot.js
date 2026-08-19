@@ -13,6 +13,17 @@ function formatSection(section) {
 }
 
 function registerVideoBot(bot) {
+  const pendingHeroImage = new Map();
+
+  function startHeroWizard(chatId) {
+    pendingHeroImage.set(chatId, { step: 'text', data: {} });
+    bot.sendMessage(chatId, 'Let’s set the hero image. Reply with the hero headline or short text for this section. Type cancel anytime to stop.');
+  }
+
+  bot.onText(/\/(newhero|addhero|heroimage)(?:\s+(.+))?/i, async (msg) => {
+    startHeroWizard(msg.chat.id);
+  });
+
   bot.onText(/\/addvideo(?:\s+(.+))?/i, async (msg, match) => {
     const [url, title, description] = parseArgs(match[1]);
     if (!url || !title) {
@@ -79,21 +90,75 @@ function registerVideoBot(bot) {
   });
 
   bot.on('message', async (msg) => {
-    if (!msg.video) return;
-    const caption = msg.caption || '';
-    const [title, description] = caption.split('|').map((part) => part.trim());
-    const video = saveRecord('videos', {
-      title: title || `Telegram video ${new Date().toISOString()}`,
-      description: description || '',
-      fileId: msg.video.file_id,
-      duration: msg.video.duration,
-      mimeType: msg.video.mime_type,
-    });
-    bot.sendMessage(msg.chat.id, `Video uploaded to backend storage:\n${formatVideo(video)}`);
+    if (msg.text && !msg.text.startsWith('/')) {
+      const flow = pendingHeroImage.get(msg.chat.id);
+      if (!flow) return;
+
+      const reply = String(msg.text).trim();
+      if (!reply) return;
+
+      if (/^cancel$/i.test(reply)) {
+        pendingHeroImage.delete(msg.chat.id);
+        return bot.sendMessage(msg.chat.id, 'Hero image flow cancelled. Send /newhero anytime to start again.');
+      }
+
+      if (flow.step === 'text') {
+        flow.data.content = reply;
+        flow.step = 'image';
+        return bot.sendMessage(msg.chat.id, 'Thanks. Now send the hero image file. Type cancel if you want to stop.');
+      }
+
+      if (flow.step === 'image') {
+        return bot.sendMessage(msg.chat.id, 'Please send the hero image file now. Type cancel if you want to stop.');
+      }
+    }
+
+    if (!msg.photo) return;
+    const flow = pendingHeroImage.get(msg.chat.id);
+    if (!flow) return;
+
+    try {
+      const fileId = msg.photo[msg.photo.length - 1].file_id;
+      const fileInfo = await bot.getFile(fileId);
+      const filePath = fileInfo && (fileInfo.file_path || fileInfo.filePath || fileInfo.file_path);
+      if (!filePath) return bot.sendMessage(msg.chat.id, 'Unable to determine file path from Telegram.');
+      const token = process.env.TELEGRAM_TOKEN;
+      if (!token) throw new Error('TELEGRAM_TOKEN is required to upload the hero image.');
+
+      const uploadsDir = require('path').join(__dirname, '..', 'public', 'uploads', 'hero');
+      if (!require('fs').existsSync(uploadsDir)) require('fs').mkdirSync(uploadsDir, { recursive: true });
+      const filename = `${Date.now()}-${fileId}-${require('path').basename(filePath)}`;
+      const destination = require('path').join(uploadsDir, filename);
+      const response = await require('axios').get(`https://api.telegram.org/file/bot${token}/${filePath}`, { responseType: 'stream' });
+      await new Promise((resolve, reject) => {
+        const stream = response.data.pipe(require('fs').createWriteStream(destination));
+        stream.on('finish', resolve);
+        stream.on('error', reject);
+      });
+
+      const section = saveRecord('contentSections', {
+        title: 'hero',
+        content: flow.data.content || 'Hero image',
+        imageFile: filename,
+        imagePath: `/uploads/hero/${filename}`,
+        type: 'hero-image'
+      });
+      pendingHeroImage.delete(msg.chat.id);
+      bot.sendMessage(msg.chat.id, `Hero image saved to the content library.\nID: ${section.id}`);
+    } catch (err) {
+      console.error('Hero image error:', err);
+      bot.sendMessage(msg.chat.id, `Failed to save hero image: ${err.message || err}`);
+    }
   });
 
   bot.onText(/\/(videohelp|help)/i, async (msg) => {
     const helpText = [
+      'Hero image flow:',
+      '/newhero',
+      '1) reply with headline text',
+      '2) send the hero image',
+      '',
+      'Other options:',
       '/addvideo url | title | description',
       '/editvideo id | field | value',
       '/deletevideo id',
@@ -101,9 +166,8 @@ function registerVideoBot(bot) {
       '/addsection title | content',
       '/editsection id | title|content | value',
       '/listsections',
-      'Send a video file with an optional caption title | description',
     ].join('\n');
-    bot.sendMessage(msg.chat.id, `Video bot commands:\n${helpText}`);
+    bot.sendMessage(msg.chat.id, `Content / media bot commands:\n${helpText}`);
   });
 }
 
