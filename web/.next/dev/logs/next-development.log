@@ -1,97 +1,28 @@
-{"timestamp":"00:00:05.291","source":"Server","level":"LOG","message":""}
-{"timestamp":"00:02:00.818","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:02:01.522","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:02:01.536","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:02:01.562","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:02:01.574","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:02:01.644","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:02:01.654","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:02:01.669","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:02:01.681","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:11.781","source":"Server","level":"LOG","message":"✓ Compiled in 785ms"}
-{"timestamp":"00:07:12.283","source":"Server","level":"WARN","message":"⚠ Fast Refresh had to perform a full reload when ./app/page.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload"}
-{"timestamp":"00:07:13.401","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:13.408","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:13.460","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:13.466","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:15.178","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:07:16.682","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:16.702","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:16.751","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:16.771","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:17.262","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:17.295","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:17.312","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:07:17.319","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:09:30.647","source":"Server","level":"LOG","message":"✓ Compiled in 1100ms"}
-{"timestamp":"00:09:32.355","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:09:32.366","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:09:32.480","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:09:32.505","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:09:32.816","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:09:32.826","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:09:32.861","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:09:32.882","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:18:16.397","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:18:17.330","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:18:17.339","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:18:17.350","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:18:17.355","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:18:17.468","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:18:17.484","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:18:17.528","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:18:17.550","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:33:35.440","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:33:37.512","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:33:37.547","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:33:37.704","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:33:37.734","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:33:37.984","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:33:38.019","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:33:38.090","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:33:38.105","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:35:28.314","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:35:29.217","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:35:29.226","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:35:29.316","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:35:29.338","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:35:29.484","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:35:29.494","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:35:29.556","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:35:29.565","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:36:15.719","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:36:17.880","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:36:17.900","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:36:17.981","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:36:18.018","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:36:18.221","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:36:18.279","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:36:18.424","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:36:18.436","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:37:20.269","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:37:21.268","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:37:21.276","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:37:21.305","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:37:21.321","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:37:21.483","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:37:21.489","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:37:21.514","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:37:21.525","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:38:04.030","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:38:06.024","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:38:06.040","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:38:06.068","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:38:06.092","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:38:06.282","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:38:06.298","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:38:06.323","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:38:06.337","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:51:26.505","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
-{"timestamp":"00:51:27.205","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:51:27.219","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:51:27.257","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:51:27.276","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:51:27.441","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:51:27.456","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:51:27.487","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
-{"timestamp":"00:51:27.498","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:14.566","source":"Server","level":"LOG","message":""}
+{"timestamp":"00:00:25.856","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:00:26.065","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:00:27.503","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:27.538","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:27.587","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:27.613","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:27.946","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:27.980","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:28.055","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:28.099","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:28.205","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:28.229","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:28.280","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:28.305","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:28.630","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:28.659","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:29.466","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:29.486","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:29.781","source":"Browser","level":"INFO","message":"Download the React DevTools for a better development experience: https://react.dev/link/react-devtools"}
+{"timestamp":"00:00:31.084","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:31.104","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:31.434","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:31.470","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:31.539","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/properties Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:31.555","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:31.755","source":"Server","level":"ERROR","message":"Failed to proxy http://localhost:3400/api/flyers Error: connect ECONNREFUSED 127.0.0.1:3400"}
+{"timestamp":"00:00:31.772","source":"Server","level":"ERROR","message":"Error: connect ECONNREFUSED 127.0.0.1:3400"}

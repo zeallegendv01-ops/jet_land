@@ -106,6 +106,11 @@ self.__SERVER_FILES_MANIFEST={
       }
     },
     "outputFileTracingRoot": "/home/xpress/Desktop/realestate/web",
+    "allowedDevOrigins": [
+      "jet-land.onrender.com",
+      "localhost",
+      "127.0.0.1"
+    ],
     "enablePrerenderSourceMaps": true,
     "cacheComponents": false,
     "cacheLife": {
