@@ -7,5 +7,9 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  return <html lang="en"><body>{children}<WhatsAppBubble/></body></html>;
+  return (
+    <html lang="en" suppressHydrationWarning>
+      <body suppressHydrationWarning>{children}<WhatsAppBubble /></body>
+    </html>
+  );
 }
