@@ -1,16 +1,18 @@
 services:
   - type: web
     name: jetland-api
+    rootDir: server
     runtime: node
-    buildCommand: npm --prefix server ci
-    startCommand: npm --prefix server start
+    buildCommand: npm ci
+    startCommand: npm start
     healthCheckPath: /health
 
   - type: web
     name: jetland-web
+    rootDir: web
     runtime: node
-    buildCommand: npm --prefix web ci && npm --prefix web run build
-    startCommand: npm --prefix web start
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
     envVars:
       - key: JETLAND_API_URL
         value: https://jet-land-2.onrender.com
