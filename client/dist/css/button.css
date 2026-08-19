@@ -1,0 +1,138 @@
+/* ==========================================================================
+   1. Shared Button Core Styles (Layout & Structure)
+   ========================================================================== */
+.btn, .btn-dark {
+    position: relative;
+    
+    /* Dynamic Sizing & Protection */
+    min-width: 120px;       
+    min-height: 45px;       
+    padding: 10px 26px;     
+    
+    /* Layout & Display */
+    display: inline-flex;   
+    justify-content: center;
+    align-items: center;
+    margin-inline: 2.5px;
+    overflow: hidden;       
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    z-index: 1;             
+    
+    /* Smooth transitions for the inversion trick */
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+/* ==========================================================================
+   2. Shared Inner Elements (The Hover Circle & Text Wrapper)
+   ========================================================================== */
+.btn .btn-effect, 
+.btn-dark .btn-effect {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250%; 
+    aspect-ratio: 1 / 1;    
+    border-radius: 50%;
+    
+    /* Hidden by default in the center */
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.4s ease-in-out;
+    z-index: -1;            
+}
+
+.btn .btn-text, 
+.btn-dark .btn-text {
+    position: relative;
+    white-space: nowrap;    
+    transition: color 0.3s ease;
+    pointer-events: none;   
+}
+
+/* ==========================================================================
+   3. Baseline Theme Customizations (Normal State)
+   ========================================================================== */
+
+/* --- Light Theme (.btn) --- */
+.btn {
+    background: transparent; 
+    border: none;
+}
+.btn .btn-effect { background: #000; }
+.btn .btn-text { color: #000; }
+
+/* --- Dark Theme (.btn-dark) --- */
+.btn-dark {
+    background: #000;
+    border: none;
+}
+.btn-dark .btn-effect { background: #fff; }
+.btn-dark .btn-text { color: #fff; }
+
+
+/* ==========================================================================
+   4. Self-Hover Actions
+   ========================================================================== */
+
+/* Trigger Inner Circle Expansion */
+.btn:hover .btn-effect, 
+.btn-dark:hover .btn-effect {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Invert Active Text Colors */
+.btn:hover .btn-text { color: #fff; }
+.btn-dark:hover .btn-text { color: #000; }
+
+/* Container Pulse */
+.btn:hover, 
+.btn-dark:hover {
+    will-change: transform;
+    animation: btn-bounce 0.5s ease-in-out forwards;
+}
+
+
+/* ==========================================================================
+   5. SIBLING INTERACTION STATE INVERSION (The Fix)
+   ========================================================================== */
+
+/* --- CASE A: You are hovering on the LIGHT button (.btn) --- */
+/* Turn the dark button light — no self-conflict here, so no :not() needed */
+body:has(.btn:hover) .btn-dark {
+    background: transparent !important;
+    /* border-color: rgba(0, 0, 0, 1) !important; */
+}
+body:has(.btn:hover) .btn-dark .btn-text {
+    color: #000 !important;
+}
+
+/* --- CASE B: You are hovering on the DARK button (.btn-dark) --- */
+/* Turn the light button dark — :not(.btn-dark) guards against self-targeting
+   since the dark button itself also carries the .btn class */
+body:has(.btn-dark:hover) .btn:not(.btn-dark) {
+    background: #000 !important;
+    border-color: #000 !important;
+}
+body:has(.btn-dark:hover) .btn:not(.btn-dark) .btn-text {
+    color: #fff !important;
+}
+
+.btn-about{
+    padding: 12px 22px;
+    border: none;
+    border-radius: 10px;
+    background: #000;
+    color: #fff;
+}
+
+
+/* ==========================================================================
+   6. Animation Keyframes
+   ========================================================================== */
+
+@keyframes btn-bounce {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}

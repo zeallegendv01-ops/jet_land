@@ -1,0 +1,22 @@
+.product-listing .listing .list-wrapper .prop-item .name, .product-listing .listing .list-wrapper .prop-item .name + .price{
+    position: absolute;
+    margin:10px;
+    padding: 14px 14px;
+    zoom: 0.8;
+    font-weight: bolder;
+    backdrop-filter: blur(3px);
+    z-index: 5;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    color: #fff;
+    border-left: 3px solid transparent;
+}
+
+.product-listing .listing .list-wrapper .prop-item .name + .price{
+    margin-top: 60px;
+    padding: none;
+    border: none;
+    backdrop-filter: none;
+    background: none;
+    color: #fff
+}

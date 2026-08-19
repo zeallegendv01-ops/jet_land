@@ -1,0 +1,10 @@
+@media (max-width: 567px){
+    .branded{
+        width: 100%;
+        zoom: 0.08;
+        padding-block: 10px;
+        font-size: 45rem;
+        text-align: center;
+        -webkit-text-stroke: 6rem transparent;
+    }
+}

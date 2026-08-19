@@ -1,0 +1,20 @@
+/* =========================== RESPONSIVENESS ======================================== */
+@import url('mobile_nav.css');
+@import url('mobile_hero.css');
+@import url('mobile_banner.css');
+@import url('mobile_about.css');
+@import url('mobile_branded.css');
+@import url('mobile_cards.css');
+@import url('mobile.batch.css');
+@import url('mobile_properties.css');
+@import url('mobile_attachment.css');
+
+@media (max-width: 567px){
+    body{
+         border: 1px solid #000;
+         width:100% !important;
+         box-sizing: border-box;
+         margin: 0 0 0 0;
+    }
+}
+

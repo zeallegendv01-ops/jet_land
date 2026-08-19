@@ -1,0 +1,117 @@
+@media (max-width: 567px){
+    .about{
+        width: 100%;
+        height: auto;
+        background: #e3e3e341;
+    }
+
+    .about .about-wrapper{
+        display: flex;
+        flex-direction: column;
+        background: transparent;
+        gap: 2rem;
+        height: auto;
+        overflow: visible;
+        padding: 3rem 1rem;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
+
+    .about-text, .about-desc{
+      width: 100%;
+      height: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: start;
+    }
+
+.about-text{
+    width: 100%;
+    border-radius: 10px;
+    padding: 0;
+}
+
+.about-text h1{
+    width: 100%;
+    font-size: 2rem;
+    margin-block: 3px;
+    margin-bottom: 6px;
+}
+
+ .about-text input, .about-text button{
+    margin-top: 1.5px;
+  }
+
+
+  .about-desc{
+    gap: 1rem;
+  }
+
+  .about-desc .desc,
+  .about-desc .desc:hover{
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    gap: 1rem;
+    overflow: visible;
+  }
+
+  .about-desc .desc .tag + .tag-desc,
+  .about-desc .desc:hover .tag-desc{
+    visibility: visible;
+    opacity: 1;
+    border-radius: 10px;
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 1rem;
+    translate: 0;
+    line-height: 1.5;
+    background: rgba(0, 0, 0, .38);
+  }
+
+.about-desc .desc .tag{
+    padding: 10px 20px;
+    height: 40px;
+    width: 70px;
+    zoom: 1;
+    font-size: 0.94rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    border-radius: 0 0 10px;
+    background: orange;
+    color: #fff;
+    font-weight: bolder;
+}
+/*
+  .about-desc:last-child .desc:nth-child(2){
+    top: -165px;
+    position: relative;
+    z-index: 7;
+    border: 1px solid orange;
+    width: 90%;
+  }
+
+  .about-desc:last-child .desc:nth-child(2):hover{
+      width: 90%;
+  }
+
+ .about-desc:last-child .desc:last-child{
+    top: -330px;
+    position: relative;
+    z-index: 10;
+    border: 1px solid orange;
+    width: 98%;
+  }
+
+  .about-desc:last-child .desc:last-child:hover{
+     width: 98%;
+  } */
+
+  
+
+}

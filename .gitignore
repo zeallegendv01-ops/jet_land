@@ -1,0 +1,9 @@
+# Ignore local environment files
+web/node_modules
+server/node_modules
+web/.env
+/.env
+server/.env
+web/.env.local
+.env.local
+

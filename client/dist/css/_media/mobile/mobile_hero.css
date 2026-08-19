@@ -1,0 +1,60 @@
+
+
+@media screen and (max-width: 567px){
+.hero{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    padding: 0.5rem;
+    gap: 0.5rem;
+}
+
+.hero .hero-left{
+    width: 100%;
+}
+
+.hero .hero-left .hero-content p{
+   font-size: 1rem;
+   margin: 0;
+   width: calc(100% - 24px);
+   margin-left: 12px;
+   margin-top: 8px;
+}
+
+.hero .hero-left .hero-content h1{
+   font-size: 1.4rem;
+   margin: 0;
+   width: calc(100% - 24px);
+   margin-left: 12px;
+}
+
+.hero .hero-search{
+     display: block;
+     width: 100%;
+     margin: 0.5rem 0;
+}
+
+.hero h1, .hero p{
+    margin-inline: 12px;
+}
+
+.hero .hero-left{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hero .hero-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+}
+
+.hero .hero-right video{
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+}
+}

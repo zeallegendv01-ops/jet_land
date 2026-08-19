@@ -1,0 +1,97 @@
+@import url('button.css');
+@import url('hero.css');
+@import url('nav.css');
+@import url('parallax.css');
+@import url('card.css');
+@import url('blob.css');
+@import url('about.css');
+@import url('banner.css');
+@import url('batch.css');
+@import url('flyers.css');
+@import url('properties.css');
+@import url('branded.css');
+@import url('service.css');
+@import url('attachment.css');
+@import url('label.css');
+@import url('footer.css');
+@import url('contact.css');
+@import url('../font-awesome/css/all.css');
+@import url('premium.css');
+
+@font-face {
+font-family: 'Anurati';
+src: url("../font-awesome/fonts/ANURATI\ /Anurati-Regular.otf") format("opentype");
+}
+
+@font-face {
+font-family: 'Oreon';
+src: url("../font-awesome/fonts/oreon/OreonFat-8ODDZ.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: 'Gero';
+    src: url('../font-awesome/fonts/gero/GeroDemoBold-KVnYA.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'Quartzo';
+    src: url('../font-awesome/fonts/quartzo/QuartzoBold-W9lv.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Playwrite';
+    src: url('../font-awesome/fonts/Playwrite/Playwrite_NZ/PlaywriteNZ-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Luxia';
+    src: url('../font-awesome/fonts/luxia/LuxiaDisplay.otf') format('opentype');
+}
+
+*, *::before, *::after{
+    font-family: sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* border: 1px solid #000; */
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+body{
+    background: #fff;
+    width: 100%;
+}
+
+img, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.--effects{
+   /* Keep content stable; the former view-timeline animation left mobile cards faded or invisible. */
+   animation: none;
+   opacity: 1;
+}
+
+@keyframes fade {
+    0%{
+        opacity: 0;
+        
+    }
+    30%, 70%{
+        opacity: 1;
+        transform: translateY(5px);
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-100px);
+    }
+}

@@ -1,0 +1,12 @@
+@media (max-width: 567px){
+    .banner{
+        height: fit-content;
+    }
+    .banner .b-right{
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #000;
+        height: fit-content;
+    }
+}
+

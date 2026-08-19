@@ -1,0 +1,35 @@
+.branded{
+    /* font-family: 'Quartzo', sans-serif; */
+    font-size: 30rem;
+    text-transform: uppercase;
+    text-align: center;
+    zoom:0.32;
+    font-weight: bolder;
+    color: transparent;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url('../img/img13.jpeg');
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-size: cover;
+    background-position: center center;
+    padding-block: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    -webkit-text-stroke: 3rem transparent;
+}
+
+.branded .hollowed{
+    color: #fff;
+    /* -webkit-text-stroke: 8rem transparent; */
+    font-family: 'Quartzo', sans-serif;
+}
+
+.color{
+    color: #fff;
+    /* -webkit-text-stroke: 8rem transparent; */
+    font-family: 'Quartzo', sans-serif;
+}

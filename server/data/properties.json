@@ -1,0 +1,94 @@
+[
+  {
+    "id": "starter-1",
+    "createdAt": "2026-08-18T15:09:14.259Z",
+    "title": "Transcorp Estate",
+    "price": "₦300,000,000",
+    "image": "img1.jpeg",
+    "category": "Luxury",
+    "soldOut": false
+  },
+  {
+    "id": "starter-2",
+    "createdAt": "2026-08-18T15:09:14.264Z",
+    "title": "5Star Estate",
+    "price": "₦40,000,000",
+    "image": "img2.jpg",
+    "category": "Residential",
+    "soldOut": false
+  },
+  {
+    "id": "starter-3",
+    "createdAt": "2026-08-18T15:09:14.264Z",
+    "title": "Aso Rock Estate",
+    "price": "₦69,000,000",
+    "image": "img3.png",
+    "category": "Luxury",
+    "soldOut": false
+  },
+  {
+    "id": "starter-4",
+    "createdAt": "2026-08-18T15:09:14.264Z",
+    "title": "Apple Estate",
+    "price": "₦78,000,000",
+    "image": "img4.jpeg",
+    "category": "Residential",
+    "soldOut": false
+  },
+  {
+    "id": "starter-5",
+    "createdAt": "2026-08-18T15:09:14.264Z",
+    "title": "Iceland Estate",
+    "price": "₦105,000,000",
+    "image": "img5.jpeg",
+    "category": "Luxury",
+    "soldOut": false
+  },
+  {
+    "id": "starter-6",
+    "createdAt": "2026-08-18T15:09:14.264Z",
+    "title": "Ngozika Estate",
+    "price": "₦45,000,000",
+    "image": "img6.jpeg",
+    "category": "Investment",
+    "soldOut": false
+  },
+  {
+    "id": "starter-7",
+    "createdAt": "2026-08-18T15:09:14.264Z",
+    "title": "Udoka Estate",
+    "price": "₦17,000,000",
+    "image": "img7.jpeg",
+    "category": "Investment",
+    "soldOut": false
+  },
+  {
+    "id": "starter-8",
+    "createdAt": "2026-08-18T15:09:14.264Z",
+    "title": "Pineleaf Estate",
+    "price": "₦200,000,000",
+    "image": "img8.jpeg",
+    "category": "Luxury",
+    "soldOut": false
+  },
+  {
+    "id": "starter-9",
+    "createdAt": "2026-08-18T15:09:14.264Z",
+    "title": "Dubai Estate",
+    "price": "₦3,000,000",
+    "image": "img9.jpeg",
+    "category": "Investment",
+    "soldOut": false
+  },
+  {
+    "id": "mszahdk7dopiv",
+    "createdAt": "2026-08-18T23:23:58.567Z",
+    "title": "Medal Estate",
+    "price": "50000000",
+    "location": "Awka",
+    "description": "",
+    "features": "",
+    "soldOut": false,
+    "images": []
+  }
+]

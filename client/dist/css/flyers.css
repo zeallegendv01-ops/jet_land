@@ -1,0 +1,18 @@
+.flyer{
+    height: 40px;
+    width: 95%;
+    margin: auto;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding-inline-end: 40px;
+    transform: scaleX(0.98);
+    margin-bottom: 100px;
+}
+
+.flyer a {
+    text-decoration: none;
+    color: rgb(2, 118, 185);
+    font-weight: bolder;
+}
+

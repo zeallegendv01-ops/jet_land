@@ -1,0 +1,155 @@
+.banner{
+    width: 95%;
+    height: 120vh;
+    margin: auto;
+    /* border: 1px solid #e3e3e3; */
+    margin-bottom: 100px;
+    scale: 0.95;
+}
+
+.banner .b-left{
+    font-size: 1.2rem;
+    transform: translateY(80%);
+    scale: 0.93;
+}
+
+.banner .b-left{
+    padding: 10px 10px;
+    display: flex;
+    gap: 5px;
+}
+
+.banner .b-left > div{
+      padding: 10px 10px;
+      border-radius: 10px;
+      color: #444;
+}
+
+.banner .b-right{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    align-items: center;
+}
+
+.banner .b-right .b-author{
+    overflow: hidden;
+    height: 100%;
+    width: 50%;
+}
+
+.banner .b-right .b-author img{
+    object-fit: cover;
+    height: 80%;
+    width: 100%;
+    scale: 0.8;
+    border-radius: 20px;
+    outline-offset: 25px;
+}
+
+.banner .b-right .b-author img + .b-desc{
+    text-align: justify;
+    width: 80%;
+    margin: auto;
+    font-size: 14px;
+}
+
+
+.banner .b-right .b-author img + .b-desc > .large-text{
+    float: left;
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-right: 14px;
+    translate: 0 -5px;
+    color: orange;
+    font-family: sans-serif;
+}
+
+.company-mantra{
+    width: 50%;
+}
+
+.company-mantra h1{
+    margin-left: 8%;
+    font-family: 'Anurati', sans-serif;
+    margin-bottom: 30px;
+    font-size: 1.5rem;
+}
+
+.company-mantra .mantra{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.company-mantra .mantra .-mantra{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    
+}
+.company-mantra .mantra .-mantra > *{
+    width: 50%;
+}
+
+.company-mantra .mantra .-mantra > *:first-child{
+    width: 20%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.company-mantra .mantra .-mantra > *:first-child hr{
+    rotate: 90deg;
+    width: 50%;
+    border: 1px dotted #4444;
+    border-top: none;
+    position: relative;
+    z-index: -1;
+}
+
+.company-mantra .mantra .-mantra > *:first-child .number{
+    background: orange;
+    color:#fff;
+    border: 6px solid #fff;
+    height: 40px;
+    width: 40px;
+    border-radius: 100px;
+    display: flex;
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.company-mantra .mantra .-mantra > *:last-child{
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    height: 130px;
+    overflow-y: hidden;
+    font-size: 14px;
+    padding-bottom: 20px;
+}
+
+.company-mantra .mantra .-mantra > *:last-child .desc{
+    line-height: 1.4;
+    text-align: justify;
+}
+
+.company-mantra .mantra .-mantra > *:last-child h3{
+  height: 50px;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.company-mantra .mantra .-mantra > *:last-child h3 :not(.fa){
+    /* font-size: 1.6rem; */
+    color: #444;
+}

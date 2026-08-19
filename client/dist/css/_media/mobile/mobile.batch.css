@@ -1,0 +1,42 @@
+@media (max-width: 567px){
+.batch{
+    background-image: url('../../../img/img23.jpeg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 40vh;
+    color:#fff;
+    width: 95%;
+    border-radius: 20px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.batch-inner{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.2);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.batch > .batch-inner *:first-child{
+    font-size: 1rem;
+    font-weight: bolder;
+    color: #fff;
+}
+
+.batch > .batch-inner *:last-child > input{
+    padding: 12px 25px;
+    border: none;
+    border-radius: 100px;
+    background: orange;
+    font-size: 1rem;
+    zoom:0.8;
+  }
+}

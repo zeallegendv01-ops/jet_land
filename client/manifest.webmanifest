@@ -1,0 +1,12 @@
+{
+  "name": "Jetland Real Estate",
+  "short_name": "Jetland",
+  "description": "Exceptional real estate opportunities, curated by Jetland.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f8f7f3",
+  "theme_color": "#006da8",
+  "icons": [
+    { "src": "dist/icons/jetland-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

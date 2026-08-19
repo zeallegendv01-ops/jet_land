@@ -1,0 +1,22 @@
+@media (max-width: 567px){
+    .promotion-card{
+        height: 15vh;
+        margin: auto;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px;
+        scale: 0.8;
+        margin-bottom: 100px;
+
+    }
+    .promotion-card .card .header{
+        font-size: 25px;
+    }
+
+    .promotion-card .card img{
+        display: none;
+    }
+}
