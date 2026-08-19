@@ -14,14 +14,10 @@ const app = exp();
 
 app.use(exp.json());
 app.use(exp.urlencoded({ extended: true }));
-app.use(exp.static(__dirname.replace('server', 'client')));
+
 // serve uploaded images
 const { join: joinPath } = require('path');
 app.use('/uploads', exp.static(joinPath(__dirname, 'public', 'uploads')));
-
-app.get('/', (req, res) => {
-  res.sendFile(join(__dirname.replace('server', 'client'), 'index.htm'));
-});
 
 app.get('/health', (req, res) => {
   res.json({ status: 'ok' });
