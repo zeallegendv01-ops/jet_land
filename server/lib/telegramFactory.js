@@ -82,9 +82,29 @@ function createTelegramWebhookBot({ token, route, app }) {
     },
     sendMessage: async (chatId, text, options = {}) => {
       const payload = Object.assign({ chat_id: chatId, text }, options);
-      return bot.api.sendMessage(payload);
+      try {
+        return await bot.api.sendMessage(payload);
+      } catch (err) {
+        const message = err && (err.message || err.description || String(err));
+        if (message && /bot was blocked by the user|403|Forbidden/i.test(message)) {
+          console.warn(`Telegram sendMessage blocked for chat ${chatId}:`, message);
+          return null;
+        }
+        throw err;
+      }
     },
-    getFile: async (fileId) => bot.api.getFile({ file_id: fileId }),
+    getFile: async (fileId) => {
+      try {
+        return await bot.api.getFile({ file_id: fileId });
+      } catch (err) {
+        const message = err && (err.message || err.description || String(err));
+        if (message && /bot was blocked by the user|403|Forbidden/i.test(message)) {
+          console.warn(`Telegram getFile blocked for file ${fileId}:`, message);
+          return null;
+        }
+        throw err;
+      }
+    },
     api: bot.api,
     startPolling: async () => { if (typeof bot.startPolling === 'function') return bot.startPolling(); },
     stopPolling: async () => {
