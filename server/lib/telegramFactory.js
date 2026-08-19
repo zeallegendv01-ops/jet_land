@@ -17,7 +17,7 @@ function createTelegramWebhookBot({ token, route, app }) {
     return null;
   }
 
-  const usePolling = String(process.env.TELEGRAM_POLLING).toLowerCase() === 'true';
+  const usePolling = String(process.env.TELEGRAM_POLLING ?? 'true').toLowerCase() === 'true' || String(process.env.TELEGRAM_POLLING).toLowerCase() === 'force';
   const bot = new TelegramBot(token, { polling: usePolling });
 
   if (!usePolling) {
